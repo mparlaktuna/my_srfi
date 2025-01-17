@@ -53,3 +53,25 @@
 		(and (not (eq? l x)) (lp x l)))
 	      (null? x)))
 	(null? x))))
+
+(define (dotted-list? x)
+  (let lp ([x x] [l x])
+    (if (pair? x)
+	(let ([x (cdr x)])
+	  (if (pair? x)
+	      (let ([x (cdr x)]
+		    [l (cdr l)])
+		(and (not (eq? x l)) (lp x l)))
+	      (not (null? x))))
+	(not (null? x)))))
+
+(define (circular-list? x)
+  (let lp ([x x] [l x])
+    (and (pair? x)
+	 (let ([x (cdr x)])
+	   (and (pair? x)
+		(let ([x (cdr x)]
+		      [l (cdr l)])
+		  (or (eq? x l) (lp x l))))))))
+
+(define (not-pair? x) (not (pair? x)))

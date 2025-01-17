@@ -41,4 +41,7 @@
 (format #t "~a\n" (circular-list 1 2))
 (test-eq #t (proper-list? '(1)))
 (test-eq #f (proper-list? (circular-list 1 2 )))
+(test-eq #t (dotted-list? (cons 1 2)))
+(test-eq #f (dotted-list? (list 1 2)))
+(test-eq #t (circular-list? (circular-list 1 2 )))
 (test-end "SRFI1")
